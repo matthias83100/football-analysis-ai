@@ -116,6 +116,42 @@ video_track = open("videos/trackers.mp4", "rb")
 video_track_bytes = video_track.read()
 st.video(video_track_bytes,autoplay=True,loop=True)
 
+
+st.markdown("""
+    If you want more details about ByteTrack Algorithm for Object Tracking here are a few explanations:
+
+**ByteTrack** is a multi-object tracking (MOT) algorithm designed to assign consistent IDs to 
+            objects across video frames, even in cases of occlusions or temporary disappearances.
+             
+
+1. **Object Detection**: ByteTrack begins by detecting objects in each frame using a detector (here YOLO) to 
+            generate bounding boxes and confidence scores.
+
+2. **High- and Low-Confidence Detections**: It splits detections into high-confidence
+             (reliable) and low-confidence (less certain) groups to improve tracking stability.
+
+3. **Track Association**:
+   - **Hungarian Algorithm**: Matches high-confidence detections 
+            with existing tracks based on **Intersection over Union (IoU)** scores.
+   - **Low-Confidence Matching**: Uses low-confidence detections 
+            to continue tracking objects that may be briefly occluded, increasing reliability.
+
+4. **Updating Tracks**: Updates tracked object positions and IDs based on successful 
+            associations. New tracks are created for unmatched detections, and untracked
+             objects are removed after a set duration.
+
+5. **Output**: ByteTrack outputs bounding boxes and IDs for each tracked object, maintaining continuity across frames.
+
+**Advantages**: 
+- Robust tracking by handling brief occlusions
+- Accurate ID continuity across frames
+- Efficient and real-time capable
+
+**Limitations**: 
+- Needs a reliable detector
+- May struggle with fast-moving or visually similar objects 
+             
+            """)
 #3)=================
 st.subheader("3) Color/Team assignement:")
 st.write("""
@@ -233,10 +269,14 @@ st.write("""
         In order to track the camera movement we will use cv2 (openCV), first things,
         we will track a "good feature" (with the function cv2.goodFeatureToTrack) and in our use
          case we will simply get the first 20 rows and the last 150 ones because they are not 
-         suposed to move except if the camera is moving. Let's add those features with goodFeatureToTrack
+         suposed to move except if the camera is moving, that's how we can get a fix image in those 
+         2 zones and it will allow us to track if there is any movement. Let's add those features 
+         with goodFeatureToTrack
          and then we will use the "Lucas-Kanade algorithm" that will be the cv2.calcOpticalFlowPyrLK 
-         function and if it's detecting a movement then we have to change the "good feature" and that's how
-         we will do to track if it's moving or not. We will also display the X and Y coordinates to 
+         function. And if it's detecting a movement then we have to change the "good feature" and that's how
+         we will do to track if it's moving or not. But to avoid "fake movements" lets add a minimum distance
+         to declare it as a movement. In our case we set 5 pixels, and as you can see it's quite accuarate
+         and close to what our eyes see in the video. We will also display the X and Y coordinates to 
          have a precise value of the movements (check video below).         
          """)
 
@@ -245,6 +285,25 @@ video_cam = open("videos/camera_move.mp4", "rb")
 video_cam_bytes = video_cam.read()
 st.video(video_cam_bytes,autoplay=True,loop=True)
 
+
+st.mardown("""
+If you want more details about the theory behind this openCV functions here is a brief explanation:
+
+## 1. Principle of Optical Flow
+- **Optical flow** represents the movement of pixels across frames in a sequence. It aims 
+to determine how each pixel shifts from one frame to the next.
+- The Lucas-Kanade algorithm assumes that pixel intensities remain constant during 
+movement and that displacements are small, which is ideal for videos with slow or gradual 
+scene changes.
+
+## 2. Small Window Assumption
+- Lucas-Kanade assumes each point in the image moves within a **small window** (or region)
+ around itself.
+- Within each small window, the algorithm assumes all pixels move similarly.
+- This simplifies calculations by focusing on local changes and helps estimate point 
+displacement accurately without interference from global variations.
+
+""")
 #7)=================
 st.subheader("7) View Transformer:")
 
