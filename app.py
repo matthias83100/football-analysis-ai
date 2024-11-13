@@ -289,14 +289,14 @@ st.video(video_cam_bytes,autoplay=True,loop=True)
 st.markdown("""
 If you want more details about the theory behind this openCV functions here is a brief explanation:
 
-1. ** Principle of Optical Flow **
+1. **Principle of Optical Flow**
 - Optical flow represents the movement of pixels across frames in a sequence. It aims 
 to determine how each pixel shifts from one frame to the next.
 - The Lucas-Kanade algorithm assumes that pixel intensities remain constant during 
 movement and that displacements are small, which is ideal for videos with slow or gradual 
 scene changes.
 
-2. ** Small Window Assumption ** 
+2. **Small Window Assumption** 
 - Lucas-Kanade assumes each point in the image moves within a small window (or region)
  around itself.
 - Within each small window, the algorithm assumes all pixels move similarly.
