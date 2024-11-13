@@ -49,7 +49,9 @@ st.write("""
     First of all we need to create an account on Roboflow and get an API key to download 
     the dataset. The dataset was already anoted (that's mean there are bounding boxes around 
     the objects of interest) as we can see (image below) there are not so many photos but it will 
-    be enough for out use case!
+    be enough for out use case! This dataset will help us a lot, because usually fine-tune a
+    model can be a very long task just because of those anotaions (imagine you have to do this
+         one by one and you have 500 or 1000 images...)
 """)
 st.image('images/roboflow.png')
 
