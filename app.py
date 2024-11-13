@@ -286,7 +286,7 @@ video_cam_bytes = video_cam.read()
 st.video(video_cam_bytes,autoplay=True,loop=True)
 
 
-st.mardown("""
+st.markdown("""
 If you want more details about the theory behind this openCV functions here is a brief explanation:
 
 ## 1. Principle of Optical Flow
