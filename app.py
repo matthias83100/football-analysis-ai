@@ -12,7 +12,7 @@ display_col=st.columns([3,1])
 with display_col[0]:
     st.subheader("Intoduction")
 with display_col[1]:
-    st.link_button(label="Github Repo",url='https://github.com/matthias83100/football_analysis_ai')
+    st.link_button(label="Github Repo",url='https://github.com/matthias83100/football-analysis-ai')
 
 
 st.write("""This is an image processing and AI project. 
